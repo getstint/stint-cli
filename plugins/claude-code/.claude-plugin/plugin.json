@@ -1,8 +1,12 @@
 {
   "name": "stint",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Sends Claude Code session time and token usage to your Stint dashboard. Run `npx getstint login` once to connect.",
-  "author": { "name": "Stint", "email": "hello@getstint.dev", "url": "https://getstint.dev" },
+  "author": {
+    "name": "Stint",
+    "email": "hello@getstint.dev",
+    "url": "https://getstint.dev"
+  },
   "homepage": "https://getstint.dev",
   "repository": "https://github.com/getstint/stint-cli",
   "license": "MIT",

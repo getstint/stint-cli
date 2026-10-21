@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.1
+
+- When the editor extension can’t be installed automatically, the CLI links its VS Code Marketplace listing.
+- Releases are published from GitHub Actions with npm provenance.
+
 ## 0.1.0
 
 First release.
