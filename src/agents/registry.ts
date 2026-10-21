@@ -165,7 +165,7 @@ const editors: Integration = {
       });
       return result.status === 0
         ? `${cli}: installed`
-        : `${cli}: couldn't install, search "Stint" in its extensions view`;
+        : `${cli}: couldn't install, get it at https://marketplace.visualstudio.com/items?itemName=getstint.stint`;
     });
     return results.join(", ") || "No editor command line found";
   },

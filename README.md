@@ -10,6 +10,7 @@
 [![npm](https://img.shields.io/npm/v/getstint?color=ffb224&label=npm)](https://www.npmjs.com/package/getstint)
 [![Node](https://img.shields.io/badge/node-%E2%89%A518.17-339933?logo=node.js&logoColor=white)](https://nodejs.org)
 [![Bun](https://img.shields.io/badge/bunx-ready-f9f1e1?logo=bun&logoColor=black)](https://bun.sh)
+[![VS Code Marketplace](https://img.shields.io/visual-studio-marketplace/v/getstint.stint?label=VS%20Code&color=007ACC)](https://marketplace.visualstudio.com/items?itemName=getstint.stint)
 [![CI](https://github.com/getstint/stint-cli/actions/workflows/ci.yml/badge.svg)](https://github.com/getstint/stint-cli/actions/workflows/ci.yml)
 [![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
@@ -75,7 +76,7 @@ Prefer a global install? `npm i -g getstint` gives you `stint` on your `PATH`.
 | **Gemini CLI**                                                      | Hooks in `~/.gemini/settings.json`                                                                                                                                  | Agent time, edits, token usage from the chat log                                              |
 | **OpenCode**                                                        | A plugin in `~/.config/opencode/plugins/stint.js`                                                                                                                   | Agent time, edits, token usage for every completed message                                    |
 | **Grok CLI, Copilot CLI, Amp, Qwen Code, anything else**            | `stint run <agent>` wraps the command                                                                                                                               | Agent time per project                                                                        |
-| **VS Code, Cursor, Windsurf, VSCodium**                             | Installs the [Stint extension](https://github.com/getstint/vscode-stint)                                                                                            | Your own coding time, languages, files and branches                                           |
+| **VS Code, Cursor, Windsurf, VSCodium**                             | Installs the Stint extension from the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=getstint.stint)                                     | Your own coding time, languages, files and branches                                           |
 | **JetBrains, Neovim, Vim, Zed, Xcode, Sublime, Emacs and 50+ more** | Points your existing [WakaTime plugin](https://wakatime.com/plugins) at Stint through `~/.wakatime.cfg`                                                             | Everything those plugins already track                                                        |
 
 Agent time is always counted **separately** from your own coding time, so a long agent session never inflates your hours.
