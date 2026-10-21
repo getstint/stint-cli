@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.5
+
+- A tidier `stint status`: a full frame, aligned labels, and today’s time split into yours and your agents’.
+
 ## 0.1.4
 
 - Fix: big history imports timed out. Uploads go in smaller batches with a longer timeout.

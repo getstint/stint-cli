@@ -92,6 +92,10 @@ export const api = {
     ),
   me: (config: Config) => request<Me>(config, "/api/v1/me"),
   today: (config: Config) => request<Today>(config, "/api/compat/wakatime/v1/users/current/statusbar/today"),
+  activityToday: (config: Config) =>
+    request<{ days: { seconds: number; agents: Record<string, number> }[] }>(config, "/api/v1/me/activity?days=1").then(
+      (body) => body.days[body.days.length - 1] ?? { seconds: 0, agents: {} },
+    ),
   heartbeats: (config: Config, heartbeats: Heartbeat[], agent?: string) =>
     request<{ responses: [unknown, number][] }>(config, "/api/v1/heartbeats", {
       body: heartbeats,
