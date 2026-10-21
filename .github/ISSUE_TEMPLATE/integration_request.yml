@@ -1,0 +1,24 @@
+name: Integration request
+description: Ask for Stint to support another agent or editor.
+title: "integration: "
+labels: ["integration", "needs triage"]
+body:
+  - type: input
+    id: tool
+    attributes:
+      label: Tool
+      placeholder: Kiro, Amp, Warp, ...
+    validations:
+      required: true
+  - type: textarea
+    id: hooks
+    attributes:
+      label: How could Stint hear about activity?
+      description: Hooks, a plugin API, an event stream, or a session log on disk. Links to the tool's docs help a lot.
+    validations:
+      required: true
+  - type: textarea
+    id: usage
+    attributes:
+      label: Does it record token usage anywhere?
+      description: For example a JSONL transcript with per-message token counts.

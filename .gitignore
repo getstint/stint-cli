@@ -1,0 +1,17 @@
+node_modules/
+dist/
+coverage/
+*.log
+*.tgz
+*.vsix
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
+CLAUDE.md
+AGENTS.md
+.claude/
+.playwright-mcp/
+.vscode/
+.idea/

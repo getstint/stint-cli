@@ -1,0 +1,14 @@
+{
+  "name": "stint",
+  "description": "Stint tracks your coding time and AI agent usage at getstint.dev.",
+  "owner": { "name": "Stint", "email": "hello@getstint.dev", "url": "https://getstint.dev" },
+  "plugins": [
+    {
+      "name": "stint",
+      "source": "./plugins/claude-code",
+      "description": "Sends Claude Code session time and token usage to your Stint dashboard.",
+      "category": "productivity",
+      "homepage": "https://getstint.dev"
+    }
+  ]
+}
