@@ -11,7 +11,7 @@ import {
 } from "node:fs";
 import { basename, dirname, join } from "node:path";
 
-export const maxQueued = 20_000;
+export const maxQueued = 250_000;
 const staleClaimMs = 10 * 60_000;
 
 export function enqueue<T>(path: string, items: T[]) {
@@ -62,7 +62,7 @@ export function claim<T>(path: string): Claim<T> | null {
     return null;
   }
   const all = parseLines<T>(readFileSync(claimPath, "utf8"));
-  const items = all.slice(-maxQueued);
+  const items = all;
   return {
     items,
     done: () => rmSync(claimPath, { force: true }),

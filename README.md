@@ -135,13 +135,13 @@ Stint is a time tracker, not a code collector.
 
 Everything lives in `~/.stint/`:
 
-| File                         | Purpose                                                             |
-| ---------------------------- | ------------------------------------------------------------------- |
-| `config.json`                | Server URL, your key, username and connected integrations           |
-| `bin/stint.mjs`              | The copy of the CLI that hooks run, so a hook never waits on `npx`  |
-| `queue.jsonl`, `usage.jsonl` | Events waiting to send while you're offline (capped at 20 000 each) |
-| `state.json`                 | How far each session log has been read                              |
-| `stint.log`                  | Hook errors, capped at 1 MB                                         |
+| File                         | Purpose                                                              |
+| ---------------------------- | -------------------------------------------------------------------- |
+| `config.json`                | Server URL, your key, username and connected integrations            |
+| `bin/stint.mjs`              | The copy of the CLI that hooks run, so a hook never waits on `npx`   |
+| `queue.jsonl`, `usage.jsonl` | Events waiting to send while you're offline (capped at 250 000 each) |
+| `state.json`                 | How far each session log has been read                               |
+| `stint.log`                  | Hook errors, capped at 1 MB                                          |
 
 Environment variables:
 

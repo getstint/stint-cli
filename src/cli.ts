@@ -10,6 +10,7 @@ import { status } from "./commands/status";
 import { sync } from "./commands/sync";
 import { parseArgs } from "./lib/args";
 import { loadConfig, saveConfig } from "./lib/config";
+import { ensureBin } from "./lib/runtime";
 import { flush } from "./lib/sender";
 import { brand } from "./lib/ui";
 import { version } from "./lib/version";
@@ -36,6 +37,7 @@ Docs: https://github.com/getstint/stint-cli`;
 
 async function main(): Promise<number> {
   const { command, positionals, flags } = parseArgs(process.argv.slice(2));
+  if (command !== "hook") ensureBin();
   if (flags.version) {
     console.info(version);
     return 0;
