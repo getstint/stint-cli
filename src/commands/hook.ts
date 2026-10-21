@@ -9,6 +9,7 @@ import { loadState, saveState } from "../lib/state";
 import { opencodeAgent, opencodeSample } from "../parsers/opencode";
 
 const flushEveryMs = 60_000;
+export const syncEveryMs = 60 * 60_000;
 const maxStdinBytes = 4 * 1024 * 1024;
 
 async function readStdin(timeoutMs: number): Promise<string> {
@@ -58,8 +59,11 @@ export async function hook(agent: string | undefined) {
       const parsed = collectFile(agent, payload.transcript_path, state, cwd);
       queueUsage(parsed.samples);
     }
+    const syncDue = !state.lastSync || Date.now() - state.lastSync > syncEveryMs;
+    if (syncDue) state.lastSync = Date.now();
     saveState(state);
-    if (end || !state.lastFlush || Date.now() - state.lastFlush > flushEveryMs)
+    if (syncDue) runDetached(["sync", "--quiet"]);
+    else if (end || !state.lastFlush || Date.now() - state.lastFlush > flushEveryMs)
       runDetached(["flush", "--quiet", `--agent=${agent}`]);
   } catch (error) {
     logLine(`hook ${agent}: ${error instanceof Error ? (error.stack ?? error.message) : String(error)}`);

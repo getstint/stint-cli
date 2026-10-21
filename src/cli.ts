@@ -78,7 +78,10 @@ async function main(): Promise<number> {
       uninstall(positionals);
       return 0;
     case "sync":
-      await sync({ days: typeof flags.days === "string" ? Number(flags.days) : undefined });
+      await sync({
+        days: typeof flags.days === "string" ? Number(flags.days) : undefined,
+        quiet: flags.quiet === true,
+      });
       return 0;
     case "flush": {
       const result = await flush(loadConfig(), typeof flags.agent === "string" ? flags.agent : undefined);

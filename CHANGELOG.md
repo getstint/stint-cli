@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.2
+
+- Past usage now syncs on its own: hooks run a background import of Claude Code, Codex, Gemini CLI and OpenCode history at most once an hour, so you never have to run `stint sync` yourself.
+
 ## 0.1.1
 
 - When the editor extension can’t be installed automatically, the CLI links its VS Code Marketplace listing.

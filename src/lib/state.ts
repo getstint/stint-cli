@@ -6,6 +6,7 @@ export type Cursor = { offset: number; size: number; carry?: Record<string, stri
 export type State = {
   cursors: Record<string, Cursor>;
   lastFlush?: number;
+  lastSync?: number;
   lastError?: { at: number; message: string };
   authFailed?: boolean;
 };
@@ -15,6 +16,7 @@ export function loadState(): State {
   return {
     cursors: stored.cursors && typeof stored.cursors === "object" ? stored.cursors : {},
     lastFlush: stored.lastFlush,
+    lastSync: stored.lastSync,
     lastError: stored.lastError,
     authFailed: stored.authFailed,
   };

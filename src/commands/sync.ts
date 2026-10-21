@@ -110,6 +110,7 @@ export async function sync(options: { days?: number; quiet?: boolean } = {}) {
   const spinner = options.quiet ? null : p.spinner();
   spinner?.start("Reading your agent history");
   const { samples, heartbeats, totals } = scanHistory(options.days);
+  saveState({ ...loadState(), lastSync: Date.now() });
   queueUsage(samples);
   queueHeartbeats(heartbeats.map((beat) => ({ ...beat, machine: config.machine })));
   spinner?.message(`Sending ${formatCount(samples.length)} usage records`);

@@ -1,6 +1,6 @@
 {
   "name": "stint",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Sends Claude Code session time and token usage to your Stint dashboard. Run `npx getstint login` once to connect.",
   "author": {
     "name": "Stint",
