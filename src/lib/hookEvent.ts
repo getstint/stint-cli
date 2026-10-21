@@ -1,4 +1,5 @@
 import { isAbsolute, relative, resolve } from "node:path";
+import { extensionEntity } from "../parsers/common";
 import { Category, type Heartbeat } from "./payloads";
 import type { ProjectInfo } from "./project";
 
@@ -57,10 +58,11 @@ export function heartbeatFromHook(
   if (file && project) {
     const absolute = isAbsolute(file) ? file : resolve(payload.cwd ?? project.root, file);
     const inside = relative(project.root, absolute);
-    if (inside && !inside.startsWith("..") && !isAbsolute(inside)) {
+    const entity = extensionEntity(absolute);
+    if (entity && inside && !inside.startsWith("..") && !isAbsolute(inside)) {
       return {
         ...base,
-        entity: inside.replace(/\\/g, "/"),
+        entity,
         type: "file",
         is_write: writeTools.test(payload.tool_name ?? "") || payload.hook_event_name === "file.edited",
       };

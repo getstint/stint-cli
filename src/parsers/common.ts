@@ -1,4 +1,4 @@
-import { isAbsolute, relative, resolve } from "node:path";
+import { basename, isAbsolute, relative, resolve } from "node:path";
 import { Category, type Heartbeat, type UsageSample } from "../lib/payloads";
 
 export type ParseContext = {
@@ -61,5 +61,12 @@ export function fileBeat(
   const absolute = isAbsolute(file) ? file : resolve(cwd ?? root, file);
   const inside = relative(root, absolute);
   if (!inside || inside.startsWith("..") || isAbsolute(inside)) return null;
-  return { ...base, entity: inside.replace(/\\/g, "/"), type: "file", is_write: isWrite };
+  const entity = extensionEntity(absolute);
+  return entity ? { ...base, entity, type: "file", is_write: isWrite } : null;
+}
+
+export function extensionEntity(file: string): string | null {
+  const name = basename(file);
+  const dot = name.lastIndexOf(".");
+  return dot > 0 ? `*${name.slice(dot).toLowerCase()}` : null;
 }

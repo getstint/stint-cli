@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.7
+
+- Heartbeats send only the file extension (`*.ts`), never the file name or path.
+
 ## 0.1.6
 
 - History imports now include the files Claude Code and Codex read and edited, so agent time gets real languages instead of “Other”.

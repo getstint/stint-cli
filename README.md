@@ -126,8 +126,8 @@ Integration ids: `claude-code`, `codex`, `gemini-cli`, `opencode`, `editors`, `w
 Stint is a time tracker, not a code collector.
 
 - **Never sent**: file contents, prompts, model responses, tool output, terminal commands, environment variables.
-- **Sent**: timestamps, project name (the folder name of the git repository), branch, the file path **relative to the project root** (so your home directory and username never leave the machine), whether the event was an edit, the agent and model names, and token counts.
-- Files outside the project, such as `~/.ssh/config`, are reported as a plain session event with no path at all.
+- **Sent**: timestamps, project name (the folder name of the git repository), branch, the file **extension only** (`*.ts`, never the file name or path), whether the event was an edit, the agent and model names, and token counts.
+- Files outside the project, such as `~/.ssh/config`, are reported as a plain session event with no file at all.
 - Your key lives in `~/.stint/config.json`, readable only by you (`0600` on macOS and Linux). Revoke it any time in **Settings › API key**.
 - Hide project names from your public profile in **Settings › Privacy**.
 

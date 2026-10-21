@@ -21,7 +21,7 @@ describe("heartbeatFromHook", () => {
       project,
     );
     expect(beat).toEqual({
-      entity: "src/app.ts",
+      entity: "*.ts",
       type: "file",
       is_write: true,
       category: Category.AiCoding,
@@ -41,7 +41,7 @@ describe("heartbeatFromHook", () => {
       1,
       project,
     );
-    expect(beat).toMatchObject({ entity: "src/a.go", type: "file", is_write: false });
+    expect(beat).toMatchObject({ entity: "*.go", type: "file", is_write: false });
   });
 
   test("files outside the project never leak their path", () => {

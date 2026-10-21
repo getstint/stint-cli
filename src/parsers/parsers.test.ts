@@ -233,7 +233,7 @@ describe("files touched by agents", () => {
     };
     const parsed = parseClaudeTranscript(jsonl(line), withRoot);
     expect(parsed.heartbeats).toEqual([
-      expect.objectContaining({ entity: "src/app.rs", type: "file", is_write: true, agent: "claude-code" }),
+      expect.objectContaining({ entity: "*.rs", type: "file", is_write: true, agent: "claude-code" }),
     ]);
   });
 
@@ -249,6 +249,6 @@ describe("files touched by agents", () => {
       },
     };
     const parsed = parseCodexSession(jsonl(meta, patch), withRoot);
-    expect(parsed.heartbeats.map((beat) => beat.entity)).toEqual(["web/page.tsx", "lib/util.go"]);
+    expect(parsed.heartbeats.map((beat) => beat.entity)).toEqual(["*.tsx", "*.go"]);
   });
 });

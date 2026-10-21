@@ -103,7 +103,7 @@ One heartbeat or an array of up to 1000. Same shape as WakaTime, plus Stint's ag
 
 | Field                                                           | Notes                                                                                                                                |
 | --------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| `entity`                                                        | A file path (send it relative to the project root) or an app label. Stint stores only a hash of it for de-duplication                |
+| `entity`                                                        | A file label used for its extension (Stint's clients send only `*.ts`) or an app label. Stored only as a hash for de-duplication     |
 | `type`                                                          | `file`, `app` or `domain`                                                                                                            |
 | `category`                                                      | `coding`, `debugging`, `building`, `ai coding`, … Anything containing `ai` is agent time and never counts toward the user's own time |
 | `time`                                                          | Unix seconds, fractions allowed                                                                                                      |
