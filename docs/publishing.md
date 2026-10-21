@@ -58,7 +58,7 @@ To appear in Anthropic's own directory as well, submit the plugin through the fo
 
 ## VS Code Marketplace and Open VSX
 
-The editor extension lives in its own repository, [`getstint/vscode-stint`](https://github.com/getstint/vscode-stint). VS Code installs from the Visual Studio Marketplace. Cursor, Windsurf, VSCodium, Gitpod and Theia install from Open VSX, so publish to both.
+The editor extension lives in its own repository, [`getstint/stint-vscode`](https://github.com/getstint/stint-vscode). VS Code installs from the Visual Studio Marketplace. Cursor, Windsurf, VSCodium, Gitpod and Theia install from Open VSX, so publish to both.
 
 ### Visual Studio Marketplace (one time)
 
