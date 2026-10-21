@@ -13,7 +13,7 @@ bun run build
 
 You need [Bun](https://bun.sh) to develop. The published CLI is a single Node file, so users only need Node 18 or newer.
 
-To work against a local server, run the [Stint web app](https://github.com/getstint/web) and set `STINT_API_URL=http://localhost:3210`. `bun scripts/e2e.ts` runs the whole flow against it inside a temporary home directory.
+To work against a local server, run the [Stint web app](https://github.com/getstint/stint) and set `STINT_API_URL=http://localhost:3210`. `bun scripts/e2e.ts` runs the whole flow against it inside a temporary home directory.
 
 ## Conventions
 
