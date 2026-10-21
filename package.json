@@ -1,6 +1,6 @@
 {
   "name": "getstint",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Track your coding time and AI agents with Stint: one command connects Claude Code, Codex, Gemini CLI, OpenCode and your editors.",
   "keywords": [
     "stint",

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.4
+
+- Fix: big history imports timed out. Uploads go in smaller batches with a longer timeout.
+
 ## 0.1.3
 
 - Fix: large imports sent only the newest 20 000 queued records and dropped the rest. The whole queue is now sent.

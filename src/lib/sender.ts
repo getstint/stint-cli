@@ -5,8 +5,8 @@ import { paths } from "./paths";
 import { claim, enqueue } from "./queue";
 import { loadState, saveState } from "./state";
 
-const heartbeatChunk = 500;
-const usageChunk = 1000;
+const heartbeatChunk = 200;
+const usageChunk = 500;
 
 export type FlushResult = { sent: number; samples: number; queued: boolean; error?: string };
 

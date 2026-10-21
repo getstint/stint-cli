@@ -96,11 +96,11 @@ export const api = {
     request<{ responses: [unknown, number][] }>(config, "/api/v1/heartbeats", {
       body: heartbeats,
       agent,
-      timeoutMs: 8_000,
+      timeoutMs: 60_000,
     }),
   usage: (config: Config, samples: UsageSample[]) =>
     request<{ inserted: number; duplicates: number }>(config, "/api/v1/usage", {
       body: { samples },
-      timeoutMs: 15_000,
+      timeoutMs: 60_000,
     }),
 };
