@@ -1,6 +1,11 @@
+import { isAbsolute, relative, resolve } from "node:path";
 import { Category, type Heartbeat, type UsageSample } from "../lib/payloads";
 
-export type ParseContext = { projectOf: (cwd: string | undefined) => string; carry?: Record<string, string> };
+export type ParseContext = {
+  projectOf: (cwd: string | undefined) => string;
+  rootOf?: (cwd: string | undefined) => string | undefined;
+  carry?: Record<string, string>;
+};
 
 export type Parsed = { samples: UsageSample[]; heartbeats: Heartbeat[]; carry: Record<string, string> };
 
@@ -43,4 +48,18 @@ export function agentBeat(agent: string, time: number, project: string, session:
     ai_session: session,
     ai_model: model,
   };
+}
+
+export function fileBeat(
+  base: Heartbeat,
+  root: string | undefined,
+  cwd: string | undefined,
+  file: string,
+  isWrite: boolean,
+): Heartbeat | null {
+  if (!root || !file || file.length > 1000) return null;
+  const absolute = isAbsolute(file) ? file : resolve(cwd ?? root, file);
+  const inside = relative(root, absolute);
+  if (!inside || inside.startsWith("..") || isAbsolute(inside)) return null;
+  return { ...base, entity: inside.replace(/\\/g, "/"), type: "file", is_write: isWrite };
 }

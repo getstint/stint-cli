@@ -210,3 +210,45 @@ describe("OpenCode messages", () => {
     ]);
   });
 });
+
+describe("files touched by agents", () => {
+  const root = "/work/acme";
+  const withRoot = { ...context, rootOf: () => root };
+
+  test("Claude Code tool calls become file heartbeats relative to the project", () => {
+    const line = {
+      type: "assistant",
+      timestamp: "2026-10-20T10:00:00Z",
+      sessionId: "s1",
+      cwd: root,
+      message: {
+        id: "m1",
+        model: "claude-opus-5-5",
+        usage: { input_tokens: 1, output_tokens: 1 },
+        content: [
+          { type: "tool_use", name: "Edit", input: { file_path: `${root}/src/app.rs` } },
+          { type: "tool_use", name: "Read", input: { file_path: "/home/me/.ssh/config" } },
+        ],
+      },
+    };
+    const parsed = parseClaudeTranscript(jsonl(line), withRoot);
+    expect(parsed.heartbeats).toEqual([
+      expect.objectContaining({ entity: "src/app.rs", type: "file", is_write: true, agent: "claude-code" }),
+    ]);
+  });
+
+  test("Codex patches name the files they add and update", () => {
+    const meta = { timestamp: "2026-10-20T10:00:00Z", type: "session_meta", payload: { id: "t1", cwd: root } };
+    const patch = {
+      timestamp: "2026-10-20T10:01:00Z",
+      type: "response_item",
+      payload: {
+        type: "custom_tool_call",
+        name: "exec",
+        input: `tools.apply_patch("*** Begin Patch\n*** Update File: ${root}/web/page.tsx\n+x\n*** Add File: lib/util.go\n+y")`,
+      },
+    };
+    const parsed = parseCodexSession(jsonl(meta, patch), withRoot);
+    expect(parsed.heartbeats.map((beat) => beat.entity)).toEqual(["web/page.tsx", "lib/util.go"]);
+  });
+});

@@ -1,7 +1,8 @@
 import type { UsageSample } from "../lib/payloads";
-import { agentBeat, lines, record, seconds, text, tokens, type ParseContext, type Parsed } from "./common";
+import { agentBeat, fileBeat, lines, record, seconds, text, tokens, type ParseContext, type Parsed } from "./common";
 
 export const claudeAgent = "claude-code";
+const writeTools = /^(write|edit|multiedit|notebookedit)$/i;
 
 export function parseClaudeTranscript(content: string, context: ParseContext): Parsed {
   const byMessage = new Map<string, UsageSample>();
@@ -33,10 +34,20 @@ export function parseClaudeTranscript(content: string, context: ParseContext): P
     if (!previous || sample.output_tokens >= previous.output_tokens)
       byMessage.set(sample.source_id, previous ? { ...sample, time: previous.time } : sample);
     const beatKey = `${session}|${Math.floor(time)}`;
-    if (!seenBeat.has(beatKey)) {
-      seenBeat.add(beatKey);
-      heartbeats.push(agentBeat(claudeAgent, time, project, session, model));
-    }
+    const base = agentBeat(claudeAgent, time, project, session, model);
+    const cwd = text(line.cwd);
+    const files = (Array.isArray(message.content) ? message.content : [])
+      .map(record)
+      .filter((part) => part.type === "tool_use")
+      .map((part) => {
+        const input = record(part.input);
+        const file = text(input.file_path) ?? text(input.notebook_path) ?? text(input.path);
+        return file ? fileBeat(base, context.rootOf?.(cwd), cwd, file, writeTools.test(text(part.name) ?? "")) : null;
+      })
+      .filter((beat): beat is NonNullable<typeof beat> => beat !== null);
+    if (files.length) heartbeats.push(...files);
+    else if (!seenBeat.has(beatKey)) heartbeats.push(base);
+    seenBeat.add(beatKey);
   }
   return { samples: [...byMessage.values()], heartbeats, carry: {} };
 }

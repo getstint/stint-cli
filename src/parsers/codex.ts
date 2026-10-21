@@ -1,7 +1,8 @@
 import type { UsageSample } from "../lib/payloads";
-import { agentBeat, lines, record, seconds, text, tokens, type ParseContext, type Parsed } from "./common";
+import { agentBeat, fileBeat, lines, record, seconds, text, tokens, type ParseContext, type Parsed } from "./common";
 
 export const codexAgent = "codex";
+const patchFile = /\*\*\* (Add|Update|Delete) File: ([^\n\\"]+)/g;
 
 function sampleFrom(
   usage: Record<string, unknown>,
@@ -55,6 +56,16 @@ export function parseCodexSession(content: string, context: ParseContext): Parse
         sampleFrom(record(payload.usage), { source_id: `codex:${response}`, time, agent: codexAgent, model, project }),
       );
       heartbeats.push(agentBeat(codexAgent, time, project, session, model));
+      continue;
+    }
+    if (line.type === "response_item" && (payload.type === "function_call" || payload.type === "custom_tool_call")) {
+      const body = text(payload.arguments) ?? text(payload.input) ?? "";
+      const base = agentBeat(codexAgent, time, project, session, carry.model);
+      const root = context.rootOf?.(carry.cwd || undefined);
+      for (const match of body.matchAll(patchFile)) {
+        const beat = fileBeat(base, root, carry.cwd || undefined, match[2].trim(), match[1] !== "Delete");
+        if (beat) heartbeats.push(beat);
+      }
       continue;
     }
     if (line.type === "event_msg" && payload.type === "token_count") {

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.6
+
+- History imports now include the files Claude Code and Codex read and edited, so agent time gets real languages instead of “Other”.
+
 ## 0.1.5
 
 - A tidier `stint status`: a full frame, aligned labels, and today’s time split into yours and your agents’.
