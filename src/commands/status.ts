@@ -1,3 +1,4 @@
+import { ago } from "../lib/ago";
 import * as p from "@clack/prompts";
 import pc from "picocolors";
 import { integrations } from "../agents/registry";
@@ -45,7 +46,8 @@ export async function status() {
   lines.push(row("Server", config.apiUrl));
   lines.push(row("Version", `${version}${hooks && hooks !== version ? pc.dim(` (hooks use ${hooks})`) : ""}`));
   lines.push(row("Waiting", queued ? `${queued} events, sent on the next flush` : "nothing queued"));
-  if (state.lastFlush) lines.push(row("Last sent", new Date(state.lastFlush).toLocaleString()));
+  if (state.lastHook) lines.push(row("Last event", `${ago(state.lastHook.at)} from ${state.lastHook.agent}`));
+  if (state.lastFlush) lines.push(row("Last sent", ago(state.lastFlush)));
   if (state.lastError) lines.push(row("Last error", pc.red(state.lastError.message)));
   p.note(lines.join("\n"), "Status");
   p.outro(config.apiKey ? `Dashboard  ${link(`${config.apiUrl}/dashboard`)}` : "Run npx getstint to get started.");

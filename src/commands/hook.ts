@@ -51,6 +51,7 @@ export async function hook(agent: string | undefined) {
     queueHeartbeats([{ ...heartbeatFromHook(agent, { ...payload, cwd }, now, project), machine: config.machine }]);
 
     const state = loadState();
+    state.lastHook = { at: Date.now(), agent };
     const end = isTurnEnd(payload.hook_event_name);
     if (agent === opencodeAgent && payload.message) {
       const { sample } = opencodeSample(payload.message, { projectOf: projectName });

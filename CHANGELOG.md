@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.8
+
+- `doctor` shows when an agent last sent an event, the last upload, anything waiting and the latest error, with how to fix each. `status` shows the last event too.
+
 ## 0.1.7
 
 - Heartbeats send only the file extension (`*.ts`), never the file name or path.
