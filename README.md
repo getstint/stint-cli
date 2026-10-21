@@ -10,7 +10,7 @@
 [![npm](https://img.shields.io/npm/v/getstint?color=ffb224&label=npm)](https://www.npmjs.com/package/getstint)
 [![Node](https://img.shields.io/badge/node-%E2%89%A518.17-339933?logo=node.js&logoColor=white)](https://nodejs.org)
 [![Bun](https://img.shields.io/badge/bunx-ready-f9f1e1?logo=bun&logoColor=black)](https://bun.sh)
-[![VS Code Marketplace](https://img.shields.io/visual-studio-marketplace/v/getstint.stint?label=VS%20Code&color=007ACC)](https://marketplace.visualstudio.com/items?itemName=getstint.stint)
+[![VS Code](https://img.shields.io/badge/VS%20Code-Marketplace-007ACC?logo=visualstudiocode&logoColor=white)](https://marketplace.visualstudio.com/items?itemName=getstint.stint)
 [![CI](https://github.com/getstint/stint-cli/actions/workflows/ci.yml/badge.svg)](https://github.com/getstint/stint-cli/actions/workflows/ci.yml)
 [![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
